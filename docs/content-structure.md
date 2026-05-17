@@ -66,6 +66,12 @@ Styles are split by scope:
 
 This keeps global CSS limited to intentional shared behavior while avoiding accidental page or component style leakage.
 
+## Detail page title spacing
+
+The presentation detail body keeps the original horizontal and bottom padding values, but its top padding subtracts GitHub Markdown CSS's heading top margin (`--base-size-24`). This makes the rendered `h1` title's distance from the article border equal to the previous padding value: 45px on desktop and 24px on narrow screens.
+
+No open issues are known for this spacing adjustment. If `github-markdown-css` changes its `h1` top margin token in the future, the top padding calculation should be reviewed against the updated upstream heading styles.
+
 ## Open issues
 
 OpenGraph, Twitter large-image cards, and final presentation metadata are not implemented yet. They can be added in `src/layouts/BaseLayout.astro` once the required image assets, canonical URL policy, and sharing metadata fields are decided.

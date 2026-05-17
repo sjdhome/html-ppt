@@ -1,8 +1,11 @@
 .markdownBody {
+  --article-padding: 45px;
+
   min-width: 200px;
   max-width: 980px;
   margin: 0 auto;
-  padding: 45px;
+  padding: calc(var(--article-padding) - var(--base-size-24))
+    var(--article-padding) var(--article-padding);
   border: 1px solid #d0d7de;
   border-radius: 12px;
   background: var(--bgColor-default);
@@ -26,6 +29,6 @@
 
 @media (max-width: 767px) {
   .markdownBody {
-    padding: 24px;
+    --article-padding: 24px;
   }
 }
