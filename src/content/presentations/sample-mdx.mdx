@@ -1,22 +1,218 @@
 ---
-title: Sample MDX Presentation
-description: A draft presentation that demonstrates Markdown content and a hydrated React component imported from MDX.
+title: Markdown Kitchen Sink Preview
+description: A draft presentation that demonstrates a broad range of Markdown, MDX, and GitHub Markdown CSS rendering states.
 date: 2026-05-17
 draft: true
 ---
 
 import DemoCounter from "../../components/DemoCounter.tsx";
 
-This sample is marked as `draft: true`, so it is visible during local development and hidden from production builds.
+# Markdown kitchen sink
 
-## Markdown content
+This draft page is intentionally dense. It is kept as `draft: true` so it can be used locally to preview typography, spacing, colors, and interactive MDX rendering without being published in production builds.
 
-GitHub Markdown styling is applied to the rendered article body, including lists and code blocks:
+The examples below cover common Markdown blocks, inline styles, code snippets, media, GitHub-flavored patterns, and a hydrated React component.
+
+---
+
+## Headings
+
+# Heading level 1
+
+## Heading level 2
+
+### Heading level 3
+
+#### Heading level 4
+
+##### Heading level 5
+
+###### Heading level 6
+
+## Paragraphs and inline formatting
+
+A regular paragraph can include **strong emphasis**, _italic emphasis_, **_combined emphasis_**, `inline code`, a [regular link](https://astro.build), and a [link with title text](https://docs.astro.build "Astro documentation").
+
+Use inline semantic HTML when Markdown has no native equivalent: <mark>highlighted text</mark>, <kbd>Ctrl</kbd> + <kbd>K</kbd>, H<sub>2</sub>O, E = mc<sup>2</sup>, and <abbr title="HyperText Markup Language">HTML</abbr>.
+
+Long text preview: Markdown content often includes sentences that wrap across multiple lines. This paragraph exists to show how the article width, line height, and contrast feel when readers scan a dense block of prose during a presentation review.
+
+## Blockquotes
+
+> A simple blockquote should stand apart from body text while still matching the article rhythm.
+
+> **Tip:** Blockquotes can include formatting, links, and lists.
+>
+> - Keep the message focused.
+> - Make important context visible.
+> - Use nested quotes sparingly.
+>
+> > Nested blockquotes are useful for quoting a quote, but the visual indentation should remain readable.
+
+## Lists
+
+Unordered list:
+
+- Alpha item with a short sentence.
+- Beta item with **bold text** and `inline code`.
+- Gamma item with nested structure:
+  - Nested bullet one.
+  - Nested bullet two.
+    - Third-level bullet for indentation preview.
+
+Ordered list:
+
+1. Define the goal.
+2. Prepare the content.
+3. Validate the rendered page.
+   1. Check desktop spacing.
+   2. Check narrow screen wrapping.
+4. Share the result.
+
+Task-list style Markdown:
+
+- [x] Headings render correctly.
+- [x] Lists preserve indentation.
+- [ ] Table and code styles are still being reviewed.
+- [ ] Interactive components hydrate in the browser.
+
+## Code
+
+Inline code can describe commands like `pnpm dev`, file names like `src/content/presentations/sample-mdx.mdx`, or values like `draft: true`.
+
+Indented code block:
+
+    pnpm install
+    pnpm dev
+
+TypeScript code fence:
 
 ```ts
-const contentFormat = "MDX";
+type PresentationStatus = "draft" | "published";
+
+interface PresentationMeta {
+  title: string;
+  description?: string;
+  date: Date;
+  status: PresentationStatus;
+}
+
+const isVisible = (status: PresentationStatus, mode: "dev" | "production") => {
+  return status === "published" || mode === "dev";
+};
 ```
 
-## React component imported by MDX
+JSON code fence:
+
+```json
+{
+  "title": "Markdown Kitchen Sink Preview",
+  "draft": true,
+  "formats": ["headings", "lists", "code", "tables", "media", "mdx"]
+}
+```
+
+Diff code fence:
+
+```diff
+- title: Sample MDX Presentation
++ title: Markdown Kitchen Sink Preview
+```
+
+Shell code fence:
+
+```sh
+pnpm typecheck
+pnpm lint
+pnpm format:check
+```
+
+## Links and references
+
+Inline links are useful for short references: [Astro content collections](https://docs.astro.build/en/guides/content-collections/).
+
+Reference-style links keep dense paragraphs easier to edit. This page uses [MDX][mdx] inside an [Astro][astro] site and relies on [GitHub Markdown CSS][github-markdown-css] for article styling.
+
+[mdx]: https://mdxjs.com/
+[astro]: https://astro.build/
+[github-markdown-css]: https://github.com/sindresorhus/github-markdown-css
+
+## Images
+
+Markdown image syntax should inherit sensible spacing and border behavior from the article container.
+
+![A simple SVG placeholder showing the word Markdown](https://placehold.co/960x360/0f172a/f8fafc.svg?text=Markdown+Preview)
+
+Image used as a link:
+
+[![A small linked placeholder](https://placehold.co/320x120/2563eb/ffffff.svg?text=Linked+Image)](https://astro.build)
+
+## Tables
+
+Markdown table source is included to preview parser support. If the MDX parser does not enable GitHub-flavored table syntax, the HTML table below still previews table styling.
+
+| Format   | Purpose                | Preview note                       |
+| -------- | ---------------------- | ---------------------------------- |
+| Headings | Show hierarchy         | Check top and bottom margins       |
+| Lists    | Show rhythm            | Check nested indentation           |
+| Code     | Show technical content | Check syntax highlighting contrast |
+| Media    | Show images            | Check max width behavior           |
+
+<table>
+  <thead>
+    <tr>
+      <th>HTML table format</th>
+      <th>Status</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Markdown CSS table styling</td>
+      <td>Visible</td>
+      <td>Useful when table syntax is not enabled by the parser.</td>
+    </tr>
+    <tr>
+      <td>Inline code in cells</td>
+      <td>
+        <code>ok</code>
+      </td>
+      <td>Checks monospace alignment inside table cells.</td>
+    </tr>
+  </tbody>
+</table>
+
+## Rules and spacing
+
+Horizontal rules separate major sections.
+
+---
+
+Text after a rule should not feel crowded.
+
+## Details and callouts
+
+<details>
+  <summary>Expandable details block</summary>
+
+This section previews native disclosure styling inside MDX. It can include Markdown-like text, inline code such as `client:load`, and other phrasing content.
+
+</details>
+
+> [!NOTE]
+> GitHub-style callout syntax is included as plain Markdown source. If callout transformations are not configured, it should still render as a normal blockquote.
+
+> [!WARNING]
+> Warnings should remain readable in both light and dark themes.
+
+## Escaped characters
+
+Markdown can show punctuation that would otherwise become formatting: \*not emphasized\*, \_not italic\_, \`not code\`, and \[not a link\](https://example.com).
+
+Use entities for angle brackets in prose: &lt;section&gt;, &lt;article&gt;, and &amp;.
+
+## MDX component preview
+
+The imported React component below verifies that this page can mix Markdown content with hydrated MDX islands.
 
 <DemoCounter client:load />

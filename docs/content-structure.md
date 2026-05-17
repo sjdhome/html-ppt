@@ -44,6 +44,12 @@ The `draft` frontmatter field controls visibility:
 
 This lets unfinished presentation work remain available for local review without publishing it in production output.
 
+## Sample Markdown preview
+
+`src/content/presentations/sample-mdx.mdx` is a draft-only kitchen-sink page used to preview the rendered effect of many Markdown and MDX constructs before writing real presentation content. It now covers headings, paragraphs, inline formatting, blockquotes, nested lists, task-list style items, fenced code, links, images, tables, horizontal rules, native details blocks, callout-style blockquotes, escaped characters, and a hydrated React component.
+
+The sample keeps table and callout source in Markdown form for parser-support visibility, and also includes an HTML table fallback so table styling can be reviewed even when GitHub-flavored table parsing is not enabled. No extra Markdown parser plugins were added for this content-only update. The fallback can be removed if the project later enables a GitHub-flavored Markdown plugin such as `remark-gfm`.
+
 ## React components in MDX
 
 MDX files can import React components from `src/components/` and hydrate them with Astro client directives when interactivity is needed:
