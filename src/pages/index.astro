@@ -8,9 +8,9 @@ import {
 import homeStyles from "../styles/home.module.css";
 import pageStyles from "../styles/page.module.css";
 
-const title = "HTML PPT";
+const title = "Meeting Presentation Reports";
 const description =
-  "Presentation content is listed automatically from MDX files in the presentations content collection.";
+  "A site for sharing meeting content with colleagues who want to review the key points after each talk.";
 const dateFormatter = new Intl.DateTimeFormat("en", { dateStyle: "medium" });
 const presentations = sortPresentationsByDateDesc(
   await getCollection("presentations", shouldIncludePresentation),
