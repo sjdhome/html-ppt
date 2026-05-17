@@ -2,7 +2,7 @@
 
 ## Requirement
 
-The project needs TypeScript, React, ESLint, Prettier, and lint-staged configured. TypeScript should target the ESNext standard, Prettier should ignore `pnpm-lock.yaml`, and commits should be blocked unless type checking, ESLint, and Prettier checks pass.
+The project needs TypeScript, React, ESLint, and Prettier configured. TypeScript should target the ESNext standard, Prettier should ignore `pnpm-lock.yaml`, and commits should be blocked unless full-project type checking, ESLint, and Prettier checks pass.
 
 ## What changed
 
@@ -10,7 +10,7 @@ The project needs TypeScript, React, ESLint, Prettier, and lint-staged configure
 - Configured `tsconfig.json` to use ESNext target, module, and library settings with React JSX support.
 - Added ESLint flat config for JavaScript, TypeScript, Astro, React, and React Hooks.
 - Added Prettier with the Astro plugin and `.prettierignore` so generated output and `pnpm-lock.yaml` are not formatted or checked.
-- Added lint-staged for staged-file ESLint and Prettier checks.
+- Removed lint-staged after deciding that commit-time validation should run full-project checks only, avoiding duplicate staged-file checks.
 - Added Husky with a `pre-commit` hook that runs `pnpm precommit`.
 - Added package scripts for `typecheck`, `lint`, `format`, `format:check`, and `precommit`.
 
@@ -19,10 +19,10 @@ The project needs TypeScript, React, ESLint, Prettier, and lint-staged configure
 Before a commit is accepted, Husky runs:
 
 ```sh
-pnpm typecheck && pnpm lint && pnpm format:check && pnpm lint-staged
+pnpm typecheck && pnpm lint && pnpm format:check
 ```
 
-This ensures the full project passes Astro/TypeScript type checking, ESLint, and Prettier checks before the staged-file lint-staged checks run.
+This ensures the full project passes Astro/TypeScript type checking, ESLint, and Prettier checks before each commit.
 
 ## Open issues
 

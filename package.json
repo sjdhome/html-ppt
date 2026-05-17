@@ -15,7 +15,7 @@
     "lint": "eslint . --max-warnings=0",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
-    "precommit": "pnpm typecheck && pnpm lint && pnpm format:check && pnpm lint-staged",
+    "precommit": "pnpm typecheck && pnpm lint && pnpm format:check",
     "prepare": "husky"
   },
   "dependencies": {
@@ -36,7 +36,6 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "globals": "^17.6.0",
     "husky": "^9.1.7",
-    "lint-staged": "^17.0.4",
     "prettier": "^3.8.3",
     "prettier-plugin-astro": "^0.14.1",
     "typescript": "^6.0.3",
