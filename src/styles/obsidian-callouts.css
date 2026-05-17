@@ -1,0 +1,122 @@
+.markdown-body {
+  & blockquote.obsidian-callout {
+    --obsidian-callout-color: 9 105 218;
+
+    padding: 16px;
+    border: 1px solid rgb(var(--obsidian-callout-color) / 0.35);
+    border-left-width: 4px;
+    border-radius: 8px;
+    background: rgb(var(--obsidian-callout-color) / 0.08);
+    color: var(--fgColor-default);
+
+    & > :last-child {
+      margin-bottom: 0;
+    }
+
+    & > .obsidian-callout-title::before {
+      content: "ℹ️";
+      line-height: 1;
+    }
+
+    &.obsidian-callout-tip,
+    &.obsidian-callout-hint,
+    &.obsidian-callout-success,
+    &.obsidian-callout-check,
+    &.obsidian-callout-done {
+      --obsidian-callout-color: 31 136 61;
+    }
+
+    &.obsidian-callout-question,
+    &.obsidian-callout-help,
+    &.obsidian-callout-faq,
+    &.obsidian-callout-example {
+      --obsidian-callout-color: 130 80 223;
+    }
+
+    &.obsidian-callout-warning,
+    &.obsidian-callout-caution,
+    &.obsidian-callout-attention,
+    &.obsidian-callout-important {
+      --obsidian-callout-color: 154 103 0;
+    }
+
+    &.obsidian-callout-danger,
+    &.obsidian-callout-error,
+    &.obsidian-callout-fail,
+    &.obsidian-callout-failure,
+    &.obsidian-callout-missing,
+    &.obsidian-callout-bug {
+      --obsidian-callout-color: 207 34 46;
+    }
+
+    &.obsidian-callout-quote,
+    &.obsidian-callout-cite {
+      --obsidian-callout-color: 87 96 106;
+    }
+
+    &.obsidian-callout-tip,
+    &.obsidian-callout-hint {
+      & > .obsidian-callout-title::before {
+        content: "💡";
+      }
+    }
+
+    &.obsidian-callout-success,
+    &.obsidian-callout-check,
+    &.obsidian-callout-done {
+      & > .obsidian-callout-title::before {
+        content: "✅";
+      }
+    }
+
+    &.obsidian-callout-question,
+    &.obsidian-callout-help,
+    &.obsidian-callout-faq {
+      & > .obsidian-callout-title::before {
+        content: "❓";
+      }
+    }
+
+    &.obsidian-callout-example {
+      & > .obsidian-callout-title::before {
+        content: "📌";
+      }
+    }
+
+    &.obsidian-callout-warning,
+    &.obsidian-callout-caution,
+    &.obsidian-callout-attention,
+    &.obsidian-callout-important {
+      & > .obsidian-callout-title::before {
+        content: "⚠️";
+      }
+    }
+
+    &.obsidian-callout-danger,
+    &.obsidian-callout-error,
+    &.obsidian-callout-fail,
+    &.obsidian-callout-failure,
+    &.obsidian-callout-missing,
+    &.obsidian-callout-bug {
+      & > .obsidian-callout-title::before {
+        content: "❌";
+      }
+    }
+
+    &.obsidian-callout-quote,
+    &.obsidian-callout-cite {
+      & > .obsidian-callout-title::before {
+        content: "💬";
+      }
+    }
+  }
+
+  & .obsidian-callout-title {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 8px;
+    color: rgb(var(--obsidian-callout-color));
+    font-weight: 600;
+  }
+}
