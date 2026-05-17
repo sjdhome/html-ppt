@@ -15,7 +15,10 @@ Use Node.js 25 and pnpm 11. The project intentionally locks only major versions.
 ```sh
 pnpm install
 pnpm dev
+PORT=4321 pnpm dev
 pnpm build
 ```
 
-See `docs/toolchain.md` for the version policy and `docs/dependency-build-scripts.md` for dependency build-script handling.
+The development server defaults to port `3000`; set `PORT` to override it.
+
+See `docs/toolchain.md` for the version policy, `docs/development-server.md` for local port behavior, and `docs/dependency-build-scripts.md` for dependency build-script handling.
