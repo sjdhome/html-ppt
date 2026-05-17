@@ -1,0 +1,30 @@
+.counter {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  margin: 24px 0;
+  border: 1px solid var(--borderColor-accent-emphasis, #0969da);
+  border-radius: 8px;
+  background: var(--bgColor-muted, #f6f8fa);
+}
+
+.label {
+  margin: 0;
+  font-weight: 600;
+}
+
+.button {
+  width: fit-content;
+  border: 1px solid var(--borderColor-default, #d0d7de);
+  border-radius: 6px;
+  padding: 6px 12px;
+  color: var(--fgColor-default, #24292f);
+  background: var(--bgColor-default, #ffffff);
+  font: inherit;
+  cursor: pointer;
+}
+
+.button:hover,
+.button:focus-visible {
+  border-color: var(--borderColor-accent-emphasis, #0969da);
+}

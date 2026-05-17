@@ -1,0 +1,66 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import {
+  shouldIncludePresentation,
+  type PresentationEntry,
+} from "../../lib/presentations";
+import pageStyles from "../../styles/page.module.css";
+import presentationStyles from "../../styles/presentation.module.css";
+
+type Props = {
+  presentation: PresentationEntry;
+};
+
+export async function getStaticPaths() {
+  const presentations = await getCollection(
+    "presentations",
+    shouldIncludePresentation,
+  );
+
+  return presentations.map((presentation) => ({
+    params: { slug: presentation.id },
+    props: { presentation },
+  }));
+}
+
+const { presentation } = Astro.props;
+const { Content } = await render(presentation);
+const dateFormatter = new Intl.DateTimeFormat("en", { dateStyle: "medium" });
+---
+
+<BaseLayout
+  title={presentation.data.title}
+  description={presentation.data.description}
+>
+  <main class={pageStyles.shell}>
+    <nav class={pageStyles.nav} aria-label="Presentation navigation">
+      <a href="/">← Back to all presentations</a>
+    </nav>
+
+    <article class:list={["markdown-body", presentationStyles.markdownBody]}>
+      <header>
+        <h1>{presentation.data.title}</h1>
+        <div class:list={[pageStyles.meta, presentationStyles.articleMeta]}>
+          <time datetime={presentation.data.date.toISOString()}>
+            {dateFormatter.format(presentation.data.date)}
+          </time>
+          {
+            presentation.data.draft ? (
+              <span class={pageStyles.draftBadge}>Draft</span>
+            ) : null
+          }
+        </div>
+        {
+          presentation.data.description ? (
+            <p class={presentationStyles.articleDescription}>
+              {presentation.data.description}
+            </p>
+          ) : null
+        }
+      </header>
+
+      <Content />
+    </article>
+  </main>
+</BaseLayout>

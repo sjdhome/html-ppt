@@ -1,18 +1,63 @@
 ---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import {
+  shouldIncludePresentation,
+  sortPresentationsByDateDesc,
+} from "../lib/presentations";
+import homeStyles from "../styles/home.module.css";
+import pageStyles from "../styles/page.module.css";
+
 const title = "HTML PPT";
+const description =
+  "Presentation content is listed automatically from MDX files in the presentations content collection.";
+const dateFormatter = new Intl.DateTimeFormat("en", { dateStyle: "medium" });
+const presentations = sortPresentationsByDateDesc(
+  await getCollection("presentations", shouldIncludePresentation),
+);
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
-  </head>
-  <body>
-    <main>
-      <h1>{title}</h1>
-      <p>Presentation content will live here.</p>
-    </main>
-  </body>
-</html>
+<BaseLayout title={title} description={description}>
+  <main class={pageStyles.shell}>
+    <header class={pageStyles.header}>
+      <h1 class={pageStyles.title}>{title}</h1>
+      <p class={pageStyles.description}>{description}</p>
+    </header>
+
+    {
+      presentations.length > 0 ? (
+        <ul class={homeStyles.presentationList}>
+          {presentations.map((presentation) => (
+            <li>
+              <a
+                class={homeStyles.presentationCard}
+                href={`/presentations/${presentation.id}/`}
+              >
+                <h2 class={homeStyles.presentationCardTitle}>
+                  {presentation.data.title}
+                </h2>
+                <div class={pageStyles.meta}>
+                  <time datetime={presentation.data.date.toISOString()}>
+                    {dateFormatter.format(presentation.data.date)}
+                  </time>
+                  {presentation.data.draft ? (
+                    <span class={pageStyles.draftBadge}>Draft</span>
+                  ) : null}
+                </div>
+                {presentation.data.description ? (
+                  <p class={homeStyles.presentationCardDescription}>
+                    {presentation.data.description}
+                  </p>
+                ) : null}
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class={pageStyles.emptyState}>
+          No published presentations are available yet.
+        </p>
+      )
+    }
+  </main>
+</BaseLayout>

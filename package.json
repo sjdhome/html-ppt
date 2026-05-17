@@ -13,14 +13,16 @@
     "astro": "astro",
     "typecheck": "astro check",
     "lint": "eslint . --max-warnings=0",
-    "format": "prettier . --write",
+    "format": "prettier . --write --cache --log-level warn",
     "format:check": "prettier . --check",
     "precommit": "pnpm typecheck && pnpm lint && pnpm format:check",
     "prepare": "husky"
   },
   "dependencies": {
+    "@astrojs/mdx": "^5.0.6",
     "@astrojs/react": "^5.0.5",
     "astro": "^6.3.3",
+    "github-markdown-css": "^5.9.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
   },

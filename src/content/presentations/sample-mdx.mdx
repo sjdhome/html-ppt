@@ -1,0 +1,22 @@
+---
+title: Sample MDX Presentation
+description: A draft presentation that demonstrates Markdown content and a hydrated React component imported from MDX.
+date: 2026-05-17
+draft: true
+---
+
+import DemoCounter from "../../components/DemoCounter.tsx";
+
+This sample is marked as `draft: true`, so it is visible during local development and hidden from production builds.
+
+## Markdown content
+
+GitHub Markdown styling is applied to the rendered article body, including lists and code blocks:
+
+```ts
+const contentFormat = "MDX";
+```
+
+## React component imported by MDX
+
+<DemoCounter client:load />
