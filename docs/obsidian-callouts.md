@@ -10,7 +10,7 @@ Presentation MDX should understand Obsidian-style callout blockquotes such as `[
 - `src/lib/remarkObsidianCallouts.ts` scans Markdown blockquotes for an initial Obsidian marker line.
 - Matching blockquotes receive stable classes such as `obsidian-callout` and `obsidian-callout-warning`.
 - The marker line is replaced with a title paragraph using either the marker's custom title or a default title for the callout type.
-- `src/styles/obsidian-callouts.css` contains the visual styling and is imported by `src/styles/global.css` after GitHub Markdown CSS.
+- `src/styles/markdown.css` contains the visual styling and is imported by `src/styles/global.css` after GitHub Markdown CSS. The file also contains other Markdown-specific overrides such as task-list checkbox styling and code-block language badges.
 
 ## Authoring examples
 
@@ -27,3 +27,5 @@ Supported marker names are normalized to lowercase and may include letters, numb
 ## Open issues
 
 Obsidian fold markers (`[!NOTE]+` and `[!NOTE]-`) are parsed and emitted as metadata, but they do not currently create collapsible callouts. This can be implemented later if presentation content needs interactive open/closed behavior, likely by rendering a `<details>` structure or adding a small hydrated component.
+
+The callout CSS now lives in the consolidated Markdown override file instead of a callout-only stylesheet. If callout styling becomes large enough to maintain separately, it can be split again as long as `src/styles/global.css` preserves import order after GitHub Markdown CSS.

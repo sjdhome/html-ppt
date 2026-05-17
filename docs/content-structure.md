@@ -48,7 +48,7 @@ This lets unfinished presentation work remain available for local review without
 
 `src/content/presentations/sample-mdx.mdx` is a draft-only kitchen-sink page used to preview the rendered effect of many Markdown and MDX constructs before writing real presentation content. It now covers headings, paragraphs, inline formatting, blockquotes, nested lists, task-list style items, fenced code, links, images, tables, horizontal rules, native details blocks, callout-style blockquotes, escaped characters, and a hydrated React component.
 
-The sample keeps table source in Markdown form for parser-support visibility and includes an HTML table fallback so table styling can be reviewed even when GitHub-flavored table parsing is not enabled. Obsidian callout source now renders through the local `remarkObsidianCallouts` plugin. The table fallback can be removed if the project later enables a GitHub-flavored Markdown plugin such as `remark-gfm`.
+The sample keeps table source in Markdown form for parser-support visibility and includes an HTML table fallback so table styling can be reviewed even when GitHub-flavored table parsing is not enabled. Obsidian callout source now renders through the local `remarkObsidianCallouts` plugin. Markdown output is also post-processed by `rehypeMarkdownRendering`, which trims the literal whitespace after task-list checkbox inputs and annotates fenced code blocks with `data-language` when the parser exposes a `language-*` class. The table fallback can be removed if the project later enables a GitHub-flavored Markdown plugin such as `remark-gfm`.
 
 ## React components in MDX
 
@@ -66,11 +66,23 @@ Static components do not need a client directive. Interactive React components s
 
 Styles are split by scope:
 
-- `src/styles/global.css` contains global reset/base styles and imports `github-markdown-css`.
+- `src/styles/global.css` contains global reset/base styles and imports `github-markdown-css` plus the local Markdown override file.
+- `src/styles/markdown.css` contains Markdown-specific overrides shared by rendered MDX, including Obsidian callouts, custom checkbox styling, task-list spacing, and overlaid code-block language badges.
 - `*.module.css` files contain page-specific or component-specific styles.
 - Detail pages apply GitHub Markdown styles with the global `markdown-body` class and combine it with local CSS Module classes for layout.
 
 This keeps global CSS limited to intentional shared behavior while avoiding accidental page or component style leakage.
+
+## Markdown rendering customizations
+
+The checkbox and code-language changes were added so presentation MDX can have a more controlled, presentation-friendly Markdown rendering surface without replacing the entire Markdown renderer.
+
+- Checkbox inputs are restyled in `src/styles/markdown.css` using `appearance: none`, Chromium/macOS-like 13px sizing, a 3px radius, gray native-style borders, subtle shadows, macOS blue checked states, dark-mode variables, and an SVG check mark.
+- `rehypeMarkdownRendering` removes the literal whitespace text node that Markdown task-list syntax places after checkbox inputs, so the item content does not begin with an extra space while normal CSS margin still controls visual separation.
+- Fenced code blocks with language classes receive a `data-language` attribute from `rehypeMarkdownRendering`.
+- The language label is rendered by `src/styles/markdown.css` as an absolute top-right badge. It intentionally does not reserve a separate first line, so code blocks keep their normal vertical rhythm.
+
+No open issues are known for these customizations. If the project later adds syntax highlighting or swaps the Markdown pipeline, the `language-*` class shape and checkbox HAST output should be rechecked against `rehypeMarkdownRendering`.
 
 ## Detail page title spacing
 

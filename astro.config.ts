@@ -2,6 +2,7 @@ import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
 import { defineConfig } from "astro/config";
 import { z } from "zod";
+import { rehypeMarkdownRendering } from "./src/lib/rehypeMarkdownRendering";
 import { remarkObsidianCallouts } from "./src/lib/remarkObsidianCallouts";
 
 const DEFAULT_DEV_SERVER_PORT = 3000;
@@ -20,6 +21,7 @@ export default defineConfig({
   integrations: [
     mdx({
       remarkPlugins: [remarkObsidianCallouts],
+      rehypePlugins: [rehypeMarkdownRendering],
     }),
     react(),
   ],

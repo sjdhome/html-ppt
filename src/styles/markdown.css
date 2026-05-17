@@ -1,4 +1,94 @@
 .markdown-body {
+  & input[type="checkbox"] {
+    --mdx-checkbox-size: 13px;
+    --mdx-checkbox-border: #767676;
+    --mdx-checkbox-border-bottom: #6b6b6b;
+    --mdx-checkbox-checked: #007aff;
+    --mdx-checkbox-focus: rgb(0 122 255 / 0.35);
+    --mdx-checkbox-surface: linear-gradient(#ffffff, #f6f6f6);
+
+    width: var(--mdx-checkbox-size);
+    height: var(--mdx-checkbox-size);
+    margin: 0 0.32em 0.18em 0;
+    vertical-align: middle;
+    appearance: none;
+    border: 1px solid var(--mdx-checkbox-border);
+    border-bottom-color: var(--mdx-checkbox-border-bottom);
+    border-radius: 3px;
+    background: var(--mdx-checkbox-surface);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.7),
+      0 1px 1px rgb(0 0 0 / 0.08);
+    cursor: default;
+  }
+
+  & input[type="checkbox"]:checked {
+    border-color: var(--mdx-checkbox-checked);
+    background-color: var(--mdx-checkbox-checked);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 13 13' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.8' d='M3.1 6.7 5.4 9 9.9 4.1'/%3E%3C/svg%3E");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 13px 13px;
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.22),
+      0 1px 1px rgb(0 0 0 / 0.08);
+  }
+
+  & input[type="checkbox"]:focus-visible {
+    outline: 3px solid var(--mdx-checkbox-focus);
+    outline-offset: 1px;
+  }
+
+  & input[type="checkbox"]:disabled {
+    opacity: 1;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    & input[type="checkbox"] {
+      --mdx-checkbox-border: #858585;
+      --mdx-checkbox-border-bottom: #747474;
+      --mdx-checkbox-checked: #0a84ff;
+      --mdx-checkbox-focus: rgb(10 132 255 / 0.42);
+      --mdx-checkbox-surface: linear-gradient(#3c3c3c, #323232);
+
+      box-shadow:
+        inset 0 1px 0 rgb(255 255 255 / 0.08),
+        0 1px 1px rgb(0 0 0 / 0.35);
+    }
+  }
+
+  & .task-list-item {
+    list-style-type: none;
+  }
+
+  & .task-list-item input[type="checkbox"] {
+    margin-left: -1.55em;
+  }
+
+  & pre[data-language] {
+    position: relative;
+  }
+
+  & pre[data-language]::before {
+    position: absolute;
+    top: 0.55em;
+    right: 0.65em;
+    padding: 0.18em 0.55em;
+    border: 1px solid var(--borderColor-default);
+    border-radius: 999px;
+    background: var(--bgColor-muted);
+    color: var(--fgColor-muted);
+    content: attr(data-language);
+    font-family:
+      ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono",
+      Menlo, monospace;
+    font-size: 0.72em;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
   & blockquote.obsidian-callout {
     --obsidian-callout-color: 9 105 218;
 

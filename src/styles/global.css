@@ -1,5 +1,5 @@
 @import "github-markdown-css/github-markdown.css";
-@import "./obsidian-callouts.css";
+@import "./markdown.css";
 
 :root {
   color-scheme: light dark;
