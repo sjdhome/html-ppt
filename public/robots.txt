@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Site-wide noindex directives are emitted in HTML meta tags.
+# Crawlers must be allowed to fetch pages to observe those directives.
