@@ -10,7 +10,7 @@ Markdown content is rendered with MDX, while custom presentation components are 
 
 ## Toolchain
 
-Use Node.js 25 and pnpm 11. The project intentionally locks only major versions.
+Use Node.js 25 and pnpm 10 or newer. Node.js is locked to major version 25, while pnpm is allowed at version 10 and above.
 
 ```sh
 pnpm install
