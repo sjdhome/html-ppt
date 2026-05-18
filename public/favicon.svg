@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">HTML PPT icon</title>
+  <desc id="desc">A black-and-white presentation screen mark inside a full-size rounded square.</desc>
+  <rect width="512" height="512" rx="112" fill="#111111" />
+  <rect x="126" y="132" width="260" height="178" rx="24" fill="#ffffff" />
+  <rect x="164" y="172" width="116" height="18" rx="9" fill="#111111" />
+  <rect x="164" y="210" width="74" height="18" rx="9" fill="#111111" />
+  <rect x="268" y="228" width="28" height="46" rx="8" fill="#111111" />
+  <rect x="310" y="198" width="28" height="76" rx="8" fill="#111111" />
+  <rect x="240" y="310" width="32" height="66" rx="16" fill="#ffffff" />
+  <rect x="184" y="366" width="144" height="36" rx="18" fill="#ffffff" />
+</svg>

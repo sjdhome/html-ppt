@@ -18,6 +18,14 @@ const pageTitle = title === siteName ? title : `${title} | ${siteName}`;
     <meta name="robots" content="noindex, nofollow, noarchive" />
     <meta name="googlebot" content="noindex, nofollow, noarchive" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#111111" />
+    <meta name="msapplication-TileColor" content="#111111" />
+    <meta name="msapplication-config" content="/browserconfig.xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#111111" />
     <title>{pageTitle}</title>
     {description ? <meta name="description" content={description} /> : null}
     <slot name="head" />
