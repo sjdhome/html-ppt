@@ -19,14 +19,14 @@ browser at build time and no JS cost on pages that contain no diagrams.
   into highlighted `<span>`s, destroying the `language-mermaid` class before
   `rehypeMermaid` could see it. Excluding `mermaid` leaves the raw
   `<pre><code class="language-mermaid">` intact; `math` keeps Astro's default
-  exclusion. `@astrojs/mdx` inherits this markdown config.
-- `astro.config.ts` registers the local `rehypeMermaid` plugin in two places
-  so both file types are covered:
-  - For `.mdx`: in the `@astrojs/mdx` `rehypePlugins` list, **before**
-    `rehypeMarkdownRendering`.
-  - For `.md`: in the top-level `markdown.rehypePlugins`. `@astrojs/mdx`
-    _replaces_ (does not merge) `rehypePlugins` when its own list is set, so
-    listing it in both places does not double-process `.mdx`.
+  exclusion.
+- The whole Markdown pipeline is configured once, in the top-level `markdown`
+  config: `remarkPlugins: [remarkObsidianCallouts]` and
+  `rehypePlugins: [rehypeMermaid, rehypeMarkdownRendering]` (in that order, so
+  `rehypeMermaid` runs first). Astro applies this to `.md`, and `@astrojs/mdx`
+  inherits it for `.mdx` because `mdx()` sets no remark/rehype lists of its
+  own (when set, `@astrojs/mdx` _replaces_ rather than merges them). The result
+  is that `.md` and `.mdx` render identically.
 - `src/lib/rehypeMermaid.ts` finds `<pre><code class="language-mermaid">`
   nodes, collects the raw diagram source, and rewrites the `<pre>` into
   `<pre class="mermaid">SOURCE</pre>` — the markup `mermaid.run()` looks for.
@@ -70,12 +70,10 @@ needed — the fenced code block is enough.
   acceptable for the presentation use case; a build-time static-SVG approach
   (`rehype-mermaid` + Playwright) was deliberately rejected to avoid a
   headless-browser build dependency.
-- Mermaid works in both `.mdx` and `.md` presentations. Note an intentional
-  asymmetry: `remarkObsidianCallouts` and `rehypeMarkdownRendering` are still
-  wired only into `@astrojs/mdx`, so plain `.md` files get Mermaid diagrams
-  but not Obsidian callouts or the code-language badge. If `.md` ever needs
-  full parity, those plugins would also be added to the top-level `markdown`
-  config (mirroring how `rehypeMermaid` is registered for `.md`).
+- Mermaid, Obsidian callouts, the code-language badge, and the task-list
+  checkbox cleanup all work identically in `.mdx` and `.md`, because the
+  Markdown pipeline is configured once in the top-level `markdown` config
+  (see "How it works"). There is no longer a `.md`/`.mdx` feature gap.
 - Mermaid runs with its default `securityLevel` (`strict`), which sanitizes
   diagram-embedded HTML. If a future diagram needs richer HTML labels, the
   `mermaid.initialize` call in `src/scripts/mermaid.ts` is the single place to

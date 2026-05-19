@@ -19,24 +19,19 @@ export default defineConfig({
   server: {
     port: portSchema.parse(process.env.PORT),
   },
-  // Skip Shiki highlighting for `mermaid` fences so rehypeMermaid still sees
-  // the original `language-mermaid` code block. `math` keeps Astro's default
-  // exclusion. @astrojs/mdx inherits this markdown config.
+  // Single source of truth for the Markdown pipeline so `.md` and `.mdx`
+  // render identically (Obsidian callouts, code-language badge, checkbox
+  // cleanup, Mermaid). @astrojs/mdx inherits this markdown config because
+  // mdx() below does not set its own remark/rehype lists (it replaces, not
+  // merges, when set). Skipping Shiki for `mermaid` keeps the original
+  // `language-mermaid` block for rehypeMermaid; `math` is Astro's default.
   markdown: {
     syntaxHighlight: {
       type: "shiki",
       excludeLangs: ["mermaid", "math"],
     },
-    // Enables Mermaid in plain `.md` presentations. @astrojs/mdx replaces
-    // (does not merge) rehypePlugins when its own list is set, so `.mdx`
-    // keeps using the mdx() list below and is unaffected by this.
-    rehypePlugins: [rehypeMermaid],
+    remarkPlugins: [remarkObsidianCallouts],
+    rehypePlugins: [rehypeMermaid, rehypeMarkdownRendering],
   },
-  integrations: [
-    mdx({
-      remarkPlugins: [remarkObsidianCallouts],
-      rehypePlugins: [rehypeMermaid, rehypeMarkdownRendering],
-    }),
-    react(),
-  ],
+  integrations: [mdx(), react()],
 });

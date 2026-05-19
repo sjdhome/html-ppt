@@ -50,6 +50,8 @@ This lets unfinished presentation work remain available for local review without
 
 The sample keeps table source in Markdown form for parser-support visibility and includes an HTML table fallback so table styling can be reviewed even when GitHub-flavored table parsing is not enabled. Obsidian callout source now renders through the local `remarkObsidianCallouts` plugin. Markdown output is also post-processed by `rehypeMarkdownRendering`, which trims the literal whitespace after task-list checkbox inputs and annotates fenced code blocks with `data-language` when the parser exposes a `language-*` class. The table fallback can be removed if the project later enables a GitHub-flavored Markdown plugin such as `remark-gfm`.
 
+This whole Markdown pipeline (Obsidian callouts, code-language badge, task-list cleanup, Mermaid) is configured once in the top-level `markdown` config in `astro.config.ts`, so plain `.md` presentations render identically to `.mdx`. `src/content/presentations/sample-md.md` is a smaller draft-only sample that previews this `.md` parity. See `docs/mermaid-diagrams.md` and `docs/obsidian-callouts.md` for the rationale.
+
 ## React components in MDX
 
 MDX files can import React components from `src/components/` and hydrate them with Astro client directives when interactivity is needed:

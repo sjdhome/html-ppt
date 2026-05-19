@@ -214,8 +214,12 @@ const transformBlockquote = (node: MarkdownNode): void => {
   blockquoteChildren.unshift(titleNode);
 };
 
+// The public transformer accepts `unknown` so it stays assignable to Astro's
+// strict `RemarkPlugin` type (mdast `Root` is not structurally compatible with
+// the local `MarkdownNode` shape). The tree is treated as `MarkdownNode`
+// internally, matching the structural style of the other local plugins.
 export const remarkObsidianCallouts =
   () =>
-  (tree: MarkdownNode): void => {
-    visit(tree, transformBlockquote);
+  (tree: unknown): void => {
+    visit(tree as MarkdownNode, transformBlockquote);
   };

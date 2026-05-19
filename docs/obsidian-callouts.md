@@ -1,12 +1,12 @@
-# Obsidian callout syntax in MDX
+# Obsidian callout syntax in Markdown and MDX
 
 ## Requirement
 
-Presentation MDX should understand Obsidian-style callout blockquotes such as `[!NOTE]`, `[!WARNING]`, and related variants, so presentation authors can paste or write familiar Obsidian notes without rewriting them as custom HTML or React components.
+Presentation `.md` and `.mdx` files should understand Obsidian-style callout blockquotes such as `[!NOTE]`, `[!WARNING]`, and related variants, so presentation authors can paste or write familiar Obsidian notes without rewriting them as custom HTML or React components.
 
 ## How it works
 
-- `astro.config.ts` configures `@astrojs/mdx` with the local `remarkObsidianCallouts` plugin.
+- `astro.config.ts` registers the local `remarkObsidianCallouts` plugin in the top-level `markdown` config, which Astro applies to `.md` files and `@astrojs/mdx` inherits for `.mdx` (it sets no remark/rehype lists of its own). This single source of truth keeps both file types identical.
 - `src/lib/remarkObsidianCallouts.ts` scans Markdown blockquotes for an initial Obsidian marker line.
 - Matching blockquotes receive stable classes such as `obsidian-callout` and `obsidian-callout-warning`.
 - The marker line is replaced with a title paragraph using either the marker's custom title or a default title for the callout type.
