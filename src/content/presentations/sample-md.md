@@ -5,8 +5,6 @@ date: 2026-05-19
 draft: true
 ---
 
-# Parity in plain Markdown
-
 This draft `.md` page confirms that plain Markdown presentations render with
 the same pipeline as `.mdx`: Mermaid diagrams, Obsidian callouts, the
 code-language badge, and task-list cleanup.

@@ -34,6 +34,18 @@ The file path determines the route. For example:
 - `src/content/presentations/demo.mdx` becomes `/presentations/demo/`.
 - `src/content/presentations/team/report.mdx` becomes `/presentations/team/report/`.
 
+## Heading levels
+
+The detail page renders the frontmatter `title` as the article's `h1` (see
+"Detail page title spacing" below). A presentation body must therefore **not
+contain a level-1 heading** — it would duplicate the title and break the
+document outline. Start body sections at `##` and go deeper from there.
+
+This is enforced by ESLint, not just convention: `pnpm lint` runs the custom
+remark rule in `eslint/remark-presentations.mjs` against every
+`src/content/presentations/**/*.{md,mdx}` file and fails on any ATX (`# `) or
+setext (`===`) level-1 heading. See `docs/code-quality-tooling.md`.
+
 ## Draft behavior
 
 The `draft` frontmatter field controls visibility:
