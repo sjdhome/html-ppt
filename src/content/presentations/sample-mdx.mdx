@@ -127,6 +127,28 @@ pnpm lint
 pnpm format:check
 ```
 
+## Diagrams
+
+A fenced `mermaid` code block is rendered as a diagram in the browser:
+
+```mermaid
+flowchart LR
+  A[MDX mermaid block] --> B{rehypeMermaid}
+  B --> C[pre.mermaid + source]
+  C --> D[Client script]
+  D --> E[Rendered SVG]
+```
+
+Sequence diagrams work the same way:
+
+````mermaid
+sequenceDiagram
+  Author->>MDX: write ```mermaid fence
+  MDX->>Browser: ship pre.mermaid
+  Browser->>Browser: lazy-load mermaid
+  Browser-->>Author: show diagram
+````
+
 ## Links and references
 
 Inline links are useful for short references: [Astro content collections](https://docs.astro.build/en/guides/content-collections/).

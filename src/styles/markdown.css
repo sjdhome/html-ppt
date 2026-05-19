@@ -89,6 +89,33 @@
     text-transform: uppercase;
   }
 
+  & pre.mermaid {
+    margin: 16px 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    overflow-x: auto;
+    text-align: center;
+    line-height: normal;
+  }
+
+  /* Hide the raw diagram source until mermaid replaces it with an SVG.
+     If client rendering fails the script adds .mermaid-fallback so the
+     source stays readable as a graceful degradation. */
+  & pre.mermaid:not([data-processed]):not(.mermaid-fallback) {
+    color: transparent;
+  }
+
+  & pre.mermaid.mermaid-fallback {
+    color: var(--fgColor-default);
+    text-align: left;
+  }
+
+  & pre.mermaid svg {
+    max-width: 100%;
+    height: auto;
+  }
+
   & blockquote.obsidian-callout {
     --obsidian-callout-color: 9 105 218;
 
