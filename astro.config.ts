@@ -6,6 +6,8 @@ import { rehypeMarkdownRendering } from "./src/lib/rehypeMarkdownRendering";
 import { rehypeMermaid } from "./src/lib/rehypeMermaid";
 import { remarkObsidianCallouts } from "./src/lib/remarkObsidianCallouts";
 
+import cloudflare from "@astrojs/cloudflare";
+
 const DEFAULT_DEV_SERVER_PORT = 3000;
 
 const portSchema = z.preprocess(
@@ -19,6 +21,7 @@ export default defineConfig({
   server: {
     port: portSchema.parse(process.env.PORT),
   },
+
   // Single source of truth for the Markdown pipeline so `.md` and `.mdx`
   // render identically (Obsidian callouts, code-language badge, checkbox
   // cleanup, Mermaid). @astrojs/mdx inherits this markdown config because
@@ -33,5 +36,7 @@ export default defineConfig({
     remarkPlugins: [remarkObsidianCallouts],
     rehypePlugins: [rehypeMermaid, rehypeMarkdownRendering],
   },
+
   integrations: [mdx(), react()],
+  adapter: cloudflare(),
 });
